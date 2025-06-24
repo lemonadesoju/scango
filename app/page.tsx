@@ -1,4 +1,3 @@
-// app/page.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -37,9 +36,9 @@ export default function HomePage() {
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-transparent pointer-events-none"></div>
       
-      {/* Hero Section */}
-      <main className="min-h-screen pb-32">
-        <div className="flex flex-col items-center justify-center px-4 sm:px-6 pt-20">
+      {/* Hero Section - ลบ pt-20 ออกเพราะมี pt-16 จาก layout แล้ว */}
+      <section className="min-h-screen pb-32">
+        <div className="flex flex-col items-center justify-center px-4 sm:px-6 min-h-screen">
           <div className="text-center max-w-4xl z-10 w-full relative">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-semibold text-white mb-4 sm:mb-6 leading-tight tracking-tight">
               ระบบจัดการคุณภาพ
@@ -117,66 +116,66 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Image Carousel */}
-        <div className="mt-24">
-          <div className="w-full mx-auto mt-4 sm:mt-8 mb-4 sm:mb-8 px-2 sm:px-4 lg:px-6">
-            <div className="relative h-48 xs:h-64 sm:h-80 md:h-96 lg:h-[28rem] max-w-[90rem] mx-auto overflow-hidden rounded-xl sm:rounded-2xl bg-gray-900/80 backdrop-blur-sm border border-gray-800 shadow-xl">
-              <div className="relative h-full">
-                <div className="absolute flex w-[300%]" style={{ transform: `translateX(-${currentSlide * 33.333}%)`, transition: 'transform 0.5s ease-in-out' }}>
-                  {slides.map((slide, index) => (
-                    <div key={index} className="relative w-full h-48 xs:h-64 sm:h-80 md:h-96 lg:h-[28rem]">
-                      <div className="w-full h-full bg-gradient-to-br from-blue-900 via-purple-800 to-blue-900 flex items-center justify-center">
-                        <div className="text-center text-white p-8">
-                          <h3 className="text-2xl md:text-4xl font-bold mb-4">{slide.title}</h3>
-                          <p className="text-lg md:text-xl mb-2 text-blue-200">{slide.subtitle}</p>
-                          <p className="text-gray-300 max-w-2xl">{slide.description}</p>
-                        </div>
+      {/* Image Carousel Section */}
+      <section className="py-16 -mt-32">
+        <div className="w-full mx-auto px-2 sm:px-4 lg:px-6">
+          <div className="relative h-48 xs:h-64 sm:h-80 md:h-96 lg:h-[28rem] max-w-[90rem] mx-auto overflow-hidden rounded-xl sm:rounded-2xl bg-gray-900/80 backdrop-blur-sm border border-gray-800 shadow-xl">
+            <div className="relative h-full">
+              <div className="absolute flex w-[300%]" style={{ transform: `translateX(-${currentSlide * 33.333}%)`, transition: 'transform 0.5s ease-in-out' }}>
+                {slides.map((slide, index) => (
+                  <div key={index} className="relative w-full h-48 xs:h-64 sm:h-80 md:h-96 lg:h-[28rem]">
+                    <div className="w-full h-full bg-gradient-to-br from-blue-900 via-purple-800 to-blue-900 flex items-center justify-center">
+                      <div className="text-center text-white p-8">
+                        <h3 className="text-2xl md:text-4xl font-bold mb-4">{slide.title}</h3>
+                        <p className="text-lg md:text-xl mb-2 text-blue-200">{slide.subtitle}</p>
+                        <p className="text-gray-300 max-w-2xl">{slide.description}</p>
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20"></div>
                     </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Navigation Buttons */}
-              <div className="absolute inset-0 flex items-center justify-between p-2 sm:p-4 z-10">
-                <button 
-                  onClick={() => setCurrentSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1)}
-                  className="group p-2 sm:p-3 rounded-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 text-white hover:bg-gray-800/70 transition-all hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#6C63FF]"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 sm:w-6 sm:h-6 group-hover:text-[#6C63FF]">
-                    <path d="m15 18-6-6 6-6"></path>
-                  </svg>
-                </button>
-                <button 
-                  onClick={() => setCurrentSlide((currentSlide + 1) % slides.length)}
-                  className="group p-2 sm:p-3 rounded-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 text-white hover:bg-gray-800/70 transition-all hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#6C63FF]"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 sm:w-6 sm:h-6 group-hover:text-[#6C63FF]">
-                    <path d="m9 18 6-6-6-6"></path>
-                  </svg>
-                </button>
-              </div>
-              
-              {/* Slide Indicators */}
-              <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
-                {slides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-500 ${
-                      index === currentSlide 
-                        ? 'bg-[#6C63FF] w-6 sm:w-8' 
-                        : 'bg-gray-400/50 hover:bg-gray-400'
-                    }`}
-                  />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20"></div>
+                  </div>
                 ))}
               </div>
             </div>
+            
+            {/* Navigation Buttons */}
+            <div className="absolute inset-0 flex items-center justify-between p-2 sm:p-4 z-10">
+              <button 
+                onClick={() => setCurrentSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1)}
+                className="group p-2 sm:p-3 rounded-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 text-white hover:bg-gray-800/70 transition-all hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#6C63FF]"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 sm:w-6 sm:h-6 group-hover:text-[#6C63FF]">
+                  <path d="m15 18-6-6 6-6"></path>
+                </svg>
+              </button>
+              <button 
+                onClick={() => setCurrentSlide((currentSlide + 1) % slides.length)}
+                className="group p-2 sm:p-3 rounded-full bg-gray-900/50 backdrop-blur-sm border border-gray-700 text-white hover:bg-gray-800/70 transition-all hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#6C63FF]"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 sm:w-6 sm:h-6 group-hover:text-[#6C63FF]">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </button>
+            </div>
+            
+            {/* Slide Indicators */}
+            <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1.5 sm:gap-2 z-10">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-500 ${
+                    index === currentSlide 
+                      ? 'bg-[#6C63FF] w-6 sm:w-8' 
+                      : 'bg-gray-400/50 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </main>
+      </section>
 
       {/* Features Section */}
       <section className="py-24 px-4">
